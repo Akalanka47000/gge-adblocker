@@ -16,7 +16,7 @@ jobs:
       - run: npm install --production
       - run: echo "${{ secrets.SIGNING_KEY }}" > key.pem
       - run: mkdir build && npm run pack-extension
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Extension file
           path: build/gge-adblocker.crx
