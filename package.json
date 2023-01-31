@@ -1,0 +1,32 @@
+{
+  "name": "gge-adblocker",
+  "version": "1.0.0",
+  "description": "Just a small extension to block the new ads in goodgame empire",
+  "main": "src",
+  "scripts": {
+    "pack": "node ./scripts/pack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Akalanka47000/gge-adblocker.git"
+  },
+  "keywords": [
+    "goodgame-empire",
+    "adblocker"
+  ],
+  "author": "Akalanka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Akalanka47000/gge-adblocker/issues"
+  },
+  "homepage": "https://github.com/Akalanka47000/gge-adblocker",
+  "dependencies": {
+    "crx3": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.2",
+    "@babel/node": "^7.18.5",
+    "@babel/preset-env": "^7.18.2"
+  }
+}

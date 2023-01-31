@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "GGE Adblocker",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://empire.goodgamestudios.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/worker.js"
+      ],
+      "persistent": false
+    }
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/logo.png",
+      "32": "assets/logo.png",
+      "48": "assets/logo.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ]
+}
