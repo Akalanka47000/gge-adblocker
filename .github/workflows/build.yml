@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install --production
+      - run: echo "${{ secrets.SIGNING_KEY }}" > key.pem
       - run: npm run pack-extension
       - uses: actions/upload-artifact@v2
         with:
