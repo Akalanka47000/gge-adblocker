@@ -18,5 +18,5 @@ jobs:
       - run: mkdir build && npm run pack-extension
       - uses: actions/upload-artifact@v2
         with:
-          name: Packed Extension
+          name: Extension file
           path: build/gge-adblocker.crx
