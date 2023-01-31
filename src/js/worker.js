@@ -28,7 +28,6 @@ const toggleActiveStatus = (adblockerActive) => {
 const initialize = async () => {
     chrome.storage.onChanged.addListener((changes, namespace) => {
         for (let [key, { _oldValue, newValue }] of Object.entries(changes)) {
-            console.log(`GGE adblocker: ${key} changed from ${_oldValue} to ${newValue}`)
             if (key === 'adblockerActive') {
                 toggleActiveStatus(newValue)
             }
