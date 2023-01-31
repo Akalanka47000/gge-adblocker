@@ -4,7 +4,7 @@
   "description": "Just a small extension to block the new ads in goodgame empire",
   "main": "src",
   "scripts": {
-    "pack": "node ./scripts/pack.js"
+    "pack-extension": "node ./scripts/pack.js"
   },
   "repository": {
     "type": "git",

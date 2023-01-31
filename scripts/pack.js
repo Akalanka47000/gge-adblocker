@@ -1,4 +1,4 @@
-import crx3 from 'crx3';
+const crx3 = require('crx3');
 
 crx3(['./src/manifest.json'], {
   crxPath: `./build/gge-adblocker.crx`,
