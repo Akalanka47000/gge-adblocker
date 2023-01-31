@@ -1,33 +1,31 @@
 console.log('GGE adblocker Running ...')
 
+let firstLoad = false
+
 const initIframeStyles = () => {
-    document.body.innerHTML += `<style>
-        #game:focus {
-            width: 100vw !important;
-            height: 100vh !important;
-            marginTop: 0px !important;
-        }
-    </style>`
+
 }
 
 const toggleActiveStatus = (adblockerActive) => {
     try {
         if (adblockerActive) {
-            console.log('GGE adblocker: Removing ads ...')
             document.getElementById('ad-placeholder-vertical')?.remove()
             document.getElementById('ad-placeholder-horizontal')?.remove()
-            const game = document.getElementById('game')
-            game.focus()
-            console.log('GGE adblocker: Ads removed')
+            document.head.innerHTML += `<style id="iframe-style-override">
+                #game {
+                    width: 100vw !important;
+                    height: 100vh !important;
+                    margin-top: 0px !important;
+                }
+            </style>`
         } else {
-    
+            document.getElementById('iframe-style-override')?.remove()
         }
     } catch (error) {
-        console.log(`GGE adblocker: Error removing ads`, error)
+        console.error(`GGE adblocker: Error removing ads - message: ${error.message}`, error)
     }
 }
 const initialize = async () => {
-    initIframeStyles()
     chrome.storage.onChanged.addListener((changes, namespace) => {
         for (let [key, { _oldValue, newValue }] of Object.entries(changes)) {
             console.log(`GGE adblocker: ${key} changed from ${_oldValue} to ${newValue}`)
@@ -36,9 +34,21 @@ const initialize = async () => {
             }
         }
     })
-    const adblockerActive = (await chrome.storage.local.get(["adblockerActive"])).adblockerActive
-    toggleActiveStatus(adblockerActive)
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    const observer = new MutationObserver(async () => {
+        if (!firstLoad && document.getElementById('game') && document.getElementById('ad-placeholder-vertical') && document.getElementById('ad-placeholder-horizontal')) {
+            firstLoad = true
+            const adblockerActive = (await chrome.storage.local.get(["adblockerActive"])).adblockerActive
+            toggleActiveStatus(adblockerActive)
+            observer.disconnect()
+        }
+    });
+    observer.observe(document, {
+        subtree: true,
+        attributes: true
+    });
 }
+
 
 if (document.readyState !== 'loading') {
     initialize()
